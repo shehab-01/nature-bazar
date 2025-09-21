@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer className="bg-nature_dark_green">
       <Container>
-        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="space-y-4">
             <Logo className="w-40" />
             <SubTitle className="text-xl hover:text-nature_light_white">
@@ -19,42 +19,45 @@ const Footer = () => {
             </SubTitle>
             <Contact />
           </div>
-          <div className="mt-10">
-            <SubTitle className="text-xl text-nature_bazar_light_green hover:text-nature_light_white">
-              Useful Links
-            </SubTitle>
-            <ul className="space-y-3 mt-4">
-              {quickLinksData.map((item) => (
-                <li key={item.title}>
-                  <Link
-                    key={item.title}
-                    href={item.href}
-                    className="text-nature_bazar_light_green font-medium hover:text-nature_light_white"
-                  >
-                    {item?.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="grid grid-cols-2">
+            <div className="md:mt-10">
+              <SubTitle className="text-xl text-nature_bazar_light_green hover:text-nature_light_white">
+                Useful Links
+              </SubTitle>
+              <ul className="space-y-3 mt-4">
+                {quickLinksData.map((item) => (
+                  <li key={item.title}>
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      className="text-nature_bazar_light_green font-medium hover:text-nature_light_white"
+                    >
+                      {item?.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="md:mt-10">
+              <SubTitle className="text-xl text-nature_bazar_light_green hover:text-nature_light_white">
+                Help Center
+              </SubTitle>
+              <ul className="space-y-3 mt-4">
+                {helpCenterData.map((item) => (
+                  <li key={item.title}>
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      className="text-nature_bazar_light_green font-medium hover:text-nature_light_white"
+                    >
+                      {item?.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div className="mt-10">
-            <SubTitle className="text-xl text-nature_bazar_light_green hover:text-nature_light_white">
-              Help Center
-            </SubTitle>
-            <ul className="space-y-3 mt-4">
-              {helpCenterData.map((item) => (
-                <li key={item.title}>
-                  <Link
-                    key={item.title}
-                    href={item.href}
-                    className="text-nature_bazar_light_green font-medium hover:text-nature_light_white"
-                  >
-                    {item?.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+
           <div className="mt-10">
             <SubTitle className="text-xl text-nature_bazar_light_green hover:text-nature_light_white">
               Nature Bazar Social Media

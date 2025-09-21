@@ -63,7 +63,9 @@ const OrderForm = () => {
           name="name_6004397793"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-semibold text-xl">নাম</FormLabel>
+              <FormLabel className="font-semibold text-sm md:text-xl">
+                নাম
+              </FormLabel>
               <FormControl>
                 <Input placeholder="আপনার নাম" type="" {...field} />
               </FormControl>
@@ -78,7 +80,7 @@ const OrderForm = () => {
           name="name_4326988703"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-semibold text-xl">
+              <FormLabel className="font-semibold text-sm md:text-xl">
                 মোবাইল নাম্বার
               </FormLabel>
               <FormControl>
@@ -99,7 +101,9 @@ const OrderForm = () => {
           name="name_8365973883"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-semibold text-xl">ঠিকানা</FormLabel>
+              <FormLabel className="font-semibold text-sm md:text-xl">
+                ঠিকানা
+              </FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="আপনার বাসার সম্পুর্ণ  ঠিকানা"
@@ -118,7 +122,7 @@ const OrderForm = () => {
           name="name_7691747641"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-semibold text-xl">
+              <FormLabel className="font-semibold text-sm md:text-xl">
                 অর্ডার নোট
               </FormLabel>
               <FormControl>

@@ -32,7 +32,7 @@ const Home = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2  border-2 border-nature_light_white rounded-sm mt-5">
-          <div className="p-10 order-2 md:order-1">
+          <div className="p-2 md:p-10 order-2 md:order-1">
             <div className="pt-4 border-2 broder-gray-400 rounded-sm text-center px-5">
               <h2 className="font-bold text-2xl">
                 অর্ডার করতে নিচের তথ্যগুলি দিন
@@ -42,8 +42,8 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="p-10 order-1 md:order-2">
-            <div className="pt-4 text-start px-5">
+          <div className="p-2 md:p-10 order-1 md:order-2">
+            <div className="pt-4 text-start px-0 md:px-5">
               <h2 className="font-bold text-2xl">পন্য বাছাই করুন</h2>
               <ProductCard />
               <div className="border-2 rounded-sm p-4">
@@ -69,7 +69,7 @@ const Home = () => {
           <div className="bg-nature_orange text-white font-bold w-full text-center rounded-sm p-2 ">
             <p>কেন আপনি গ্যাস্ট্রো-জেন পাউডারটি কিনবেন?</p>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2">
             <WhyProductCard>
               গ্যাস্ট্রো-জেন, মেথি সহ ১২ টি প্রাকৃতিক উপাদান দিয়ে তৈরি। কোন
               প্রকার ক্যামিক্যাকেল এর অস্তিত্ব প্রমাণ করতে পারলে নগদ ১০০,০০০
@@ -97,7 +97,7 @@ const Home = () => {
           <div className="bg-nature_dark_green text-white font-bold w-full text-center rounded-sm p-2 ">
             <p>গ্যাস্ট্রিক এর উপসর্গ</p>
           </div>
-          <ol className="">
+          <ol className="py-4">
             <li className="text-xl font-normal flex items-center  ">
               <span className="p-2">
                 <Check />
