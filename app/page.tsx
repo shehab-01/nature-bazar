@@ -1,103 +1,145 @@
-import Image from "next/image";
+import React from "react";
+import Container from "@/components/Container";
+import { BannerCarousel } from "@/components/BannerCarousel";
+import { Button } from "@/components/ui/button";
+import OrderForm from "@/components/OrderForm";
+import ProductCard from "@/components/ProductCard";
+import { Separator } from "@/components/ui/separator";
+import ProductInformation from "@/components/ProductInformation";
+import WhyProductCard from "@/components/WhyProductCard";
+import { Check } from "lucide-react";
 
-export default function Home() {
+const Home = () => {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <Container className="bg-white">
+      <div className="min-h-full">
+        <div className="flex flex-col gap-5 items-center">
+          <h2 className="pt-10 text-2xl font-semibold text-nature_bazar_red">
+            মেথি-মিক্স | Methi Mix
+          </h2>
+          <BannerCarousel />
+          <div className="py-10 w-full flex justify-center">
+            <Button
+              variant="nature_btn"
+              size="lg"
+              className="bg-nature_yellow hover:bg-nature_yellow/90 w-full md:w-auto"
+            >
+              এখনই অর্ডার করুন
+            </Button>
+          </div>
+          <div className="bg-nature_dark_green text-white font-bold w-full text-center rounded-sm p-2 ">
+            <p>প্রয়োজনে কল করুন - 01345-151716</p>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <div className="grid grid-cols-1 md:grid-cols-2  border-2 border-nature_light_white rounded-sm mt-5">
+          <div className="p-10 order-2 md:order-1">
+            <div className="pt-4 border-2 broder-gray-400 rounded-sm text-center px-5">
+              <h2 className="font-bold text-2xl">
+                অর্ডার করতে নিচের তথ্যগুলি দিন
+              </h2>
+              <div className="">
+                <OrderForm />
+              </div>
+            </div>
+          </div>
+          <div className="p-10 order-1 md:order-2">
+            <div className="pt-4 text-start px-5">
+              <h2 className="font-bold text-2xl">পন্য বাছাই করুন</h2>
+              <ProductCard />
+              <div className="border-2 rounded-sm p-4">
+                <div className="flex justify-between">
+                  <p className="py-1">মোট</p>
+                  <p className="py-1">1200</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="py-1">ডেলিভারি চার্জ</p>
+                  <p className="py-1">50</p>
+                </div>
+                <Separator />
+                <div className="flex justify-between">
+                  <p className="py-1">Total</p>
+                  <p className="py-1">1250</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/*  */}
+        <div className="py-4 flex flex-col space-y-2">
+          <div className="bg-nature_orange text-white font-bold w-full text-center rounded-sm p-2 ">
+            <p>কেন আপনি গ্যাস্ট্রো-জেন পাউডারটি কিনবেন?</p>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <WhyProductCard>
+              গ্যাস্ট্রো-জেন, মেথি সহ ১২ টি প্রাকৃতিক উপাদান দিয়ে তৈরি। কোন
+              প্রকার ক্যামিক্যাকেল এর অস্তিত্ব প্রমাণ করতে পারলে নগদ ১০০,০০০
+              টাকা পুরষ্কার প্রদান করা হবে।
+            </WhyProductCard>
+            <WhyProductCard>
+              গ্যাস্ট্রো-জেন, মেথি সহ ১২ টি প্রাকৃতিক উপাদান দিয়ে তৈরি। কোন
+              প্রকার ক্যামিক্যাকেল এর অস্তিত্ব প্রমাণ করতে পারলে নগদ ১০০,০০০
+              টাকা পুরষ্কার প্রদান করা হবে।
+            </WhyProductCard>
+            <WhyProductCard>
+              গ্যাস্ট্রো-জেন, মেথি সহ ১২ টি প্রাকৃতিক উপাদান দিয়ে তৈরি। কোন
+              প্রকার ক্যামিক্যাকেল এর অস্তিত্ব প্রমাণ করতে পারলে নগদ ১০০,০০০
+              টাকা পুরষ্কার প্রদান করা হবে।
+            </WhyProductCard>
+            <WhyProductCard>
+              গ্যাস্ট্রো-জেন, মেথি সহ ১২ টি প্রাকৃতিক উপাদান দিয়ে তৈরি। কোন
+              প্রকার ক্যামিক্যাকেল এর অস্তিত্ব প্রমাণ করতে পারলে নগদ ১০০,০০০
+              টাকা পুরষ্কার প্রদান করা হবে।
+            </WhyProductCard>
+          </div>
+          {/* <ProductInformation /> */}
+        </div>
+        <div className="flex flex-col space-y-2">
+          <div className="bg-nature_dark_green text-white font-bold w-full text-center rounded-sm p-2 ">
+            <p>গ্যাস্ট্রিক এর উপসর্গ</p>
+          </div>
+          <ol className="">
+            <li className="text-xl font-normal flex items-center  ">
+              <span className="p-2">
+                <Check />
+              </span>
+              খাওয়ার পর পেটে ও বুকে জ্বালাপোড়া হয়
+            </li>
+            <li className="text-xl font-normal flex items-center  ">
+              <span className="p-2">
+                <Check />
+              </span>
+              অতিরিক্ত গ্যাস পেটে জমলে পেট ফাঁপা হয়ে থাকে এবং ঢেঁকুর আসতে থাকে
+            </li>
+            <li className="text-xl font-normal flex items-center  ">
+              <span className="p-2">
+                <Check />
+              </span>
+              হজমে সমস্যা হওয়ার ফলে বমি ভাব হয়
+            </li>
+            <li className="text-xl font-normal flex items-center  ">
+              <span className="p-2">
+                <Check />
+              </span>
+              গ্যাস্ট্রিক এর সমস্যার ফলে রাতে ঘুম ব্যহত হয়
+            </li>
+            <li className="text-xl font-normal flex items-center  ">
+              <span className="p-2">
+                <Check />
+              </span>
+              পেটের অস্থিরতার কারনে কোন কাজে মনোযোগ বসে না
+            </li>
+            <li className="text-xl font-normal flex items-center  ">
+              <span className="p-2">
+                <Check />
+              </span>
+              গ্যাস্ট্রিককে অবহেলা করলে এক সময় আলসার অথবা ইনফেকশেন অথবা
+              ক্যান্সার এ পরিণত হয়
+            </li>
+          </ol>
+        </div>
+      </div>
+    </Container>
   );
-}
+};
+
+export default Home;
