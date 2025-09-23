@@ -1,6 +1,6 @@
 "use client";
 import { Home, ShoppingBasket, UserRound } from "lucide-react";
-import { supabase } from "@/lib/supabaseClient";
+import { createClient } from "@/lib/supabaseClient";
 
 import {
   Sidebar,
@@ -49,6 +49,7 @@ export function AppSidebar() {
   const router = useRouter();
 
   const handleLogout = async () => {
+    const supabase = createClient();
     console.log("Sign out");
     await supabase.auth.signOut();
     router.push("/admin/login");
