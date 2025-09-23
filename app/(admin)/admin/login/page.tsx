@@ -4,8 +4,6 @@ import Link from "next/link";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-// import { toast } from 'sonner'
-
 import {
   Form,
   FormControl,
@@ -23,17 +21,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-// import { PasswordInput } from '@/components/ui/password-input'
-
-// import { loginFormSchema } from '@/lib/validation-schemas'
-
-// const formSchema = loginFormSchema
+import { supabase } from "@/lib/supabaseClient";
+import { redirect, RedirectType } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const formSchema = z.object({
   email: z.email().min(1, { message: "Enter email" }),
   password: z.string().min(1, { message: "Enter your password" }),
 });
 export default function LoginPreview() {
+  const router = useRouter();
+  const [error, setError] = useState("");
+  // const { refreshProfile } = useAuth()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,13 +45,22 @@ export default function LoginPreview() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      // Assuming an async login function
       console.log(values);
-      //   toast(
-      //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-      //       <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-      //     </pre>
-      //   );
+      const email = values.email;
+      const password = values.password;
+
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        setError(error.message);
+        console.log("Error loging in", error);
+      } else {
+        console.log("logged in");
+        router.push("/admin/dashboard");
+      }
     } catch (error) {
       console.error("Form submission error", error);
       //   toast.error("Failed to submit the form. Please try again.");
@@ -115,7 +125,12 @@ export default function LoginPreview() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full">
+                {error && (
+                  <p className="text-sm text-red-400">
+                    Please check Email or Password.
+                  </p>
+                )}
+                <Button type="submit" className="w-full cursor-pointer">
                   Login
                 </Button>
                 {/* <Button variant="outline" className="w-full">
@@ -130,6 +145,8 @@ export default function LoginPreview() {
               Sign up
             </Link>
           </div>
+          jsuddin02@gmail.com <br />
+          123456
         </CardContent>
       </Card>
     </div>

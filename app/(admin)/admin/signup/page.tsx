@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { z } from "zod";
+import { any, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 // import { toast } from 'sonner'
@@ -25,6 +25,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { supabase } from "@/lib/supabaseClient";
 // import { PasswordInput } from '@/components/ui/password-input'
 // import { PhoneInput } from '@/components/ui/phone-input'
 
@@ -36,7 +37,9 @@ const formSchema = z.object({
   name: z.string().min(1, { message: "Enter your Name" }),
   email: z.email().min(1, { message: "Enter your Email" }),
   phone: z.string().min(1, { message: "Enter your name" }),
-  password: z.string().min(1, { message: "Enter your name" }),
+  password: z
+    .string()
+    .min(6, { message: "Enter your Password( atleast 6 characters )" }),
   confirmPassword: z.string().min(1, { message: "Enter your name" }),
 });
 
@@ -55,7 +58,41 @@ export default function RegisterPreview() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       // Assuming an async registration function
+      // values.role = "user";
       console.log(values);
+      // const payload = { ...values, role: "user" };
+      // console.log(payload);
+
+      const email = values.email;
+      const password = values.password;
+      const name = values.name;
+      const phone = values.phone;
+      const role = "user";
+
+      if (password !== values.confirmPassword) {
+        console.log("Check password");
+        return;
+      }
+
+      if (password.length < 6) {
+        console.log("Password must be more than 6 characters");
+      }
+
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (error) throw error;
+      const user = data.user;
+      if (!user) throw new Error("No user returned from signup");
+
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .insert([{ id: user.id, name, phone, role }]);
+
+      if (profileError) throw profileError;
+
       //   toast(
       //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
       //       <code className="text-white">{JSON.stringify(values, null, 2)}</code>
@@ -203,7 +240,7 @@ export default function RegisterPreview() {
                   )}
                 />
 
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full cursor-pointer">
                   Register
                 </Button>
               </div>
