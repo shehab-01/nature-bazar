@@ -21,18 +21,19 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { supabase } from "@/lib/supabaseClient";
-import { redirect, RedirectType } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+// import { redirect, RedirectType } from "next/navigation";
+// import { useRouter } from "next/navigation";
+// import { useState } from "react";
+import { login, signup } from "./actions";
 
 const formSchema = z.object({
   email: z.email().min(1, { message: "Enter email" }),
   password: z.string().min(1, { message: "Enter your password" }),
 });
+
 export default function LoginPreview() {
-  const router = useRouter();
-  const [error, setError] = useState("");
+  // const router = useRouter();
+  // const [error, setError] = useState("");
   // const { refreshProfile } = useAuth()
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -43,29 +44,30 @@ export default function LoginPreview() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      console.log(values);
-      const email = values.email;
-      const password = values.password;
+  // async function onSubmit(values: z.infer<typeof formSchema>) {
+  //   try {
+  //     const supabase = createClient();
+  //     console.log(values);
+  //     const email = values.email;
+  //     const password = values.password;
 
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+  //     const { data, error } = await supabase.auth.signInWithPassword({
+  //       email,
+  //       password,
+  //     });
 
-      if (error) {
-        setError(error.message);
-        console.log("Error loging in", error);
-      } else {
-        console.log("logged in");
-        router.push("/admin/dashboard");
-      }
-    } catch (error) {
-      console.error("Form submission error", error);
-      //   toast.error("Failed to submit the form. Please try again.");
-    }
-  }
+  //     if (error) {
+  //       setError(error.message);
+  //       console.log("Error loging in", error);
+  //     } else {
+  //       console.log("logged in");
+  //       router.push("/admin/dashboard");
+  //     }
+  //   } catch (error) {
+  //     console.error("Form submission error", error);
+  //     //   toast.error("Failed to submit the form. Please try again.");
+  //   }
+  // }
 
   return (
     <div className="flex flex-col min-h-[65vh] h-full w-full items-center justify-center px-4">
@@ -78,7 +80,7 @@ export default function LoginPreview() {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form className="space-y-8">
               <div className="grid gap-4">
                 <FormField
                   control={form.control}
@@ -125,12 +127,16 @@ export default function LoginPreview() {
                     </FormItem>
                   )}
                 />
-                {error && (
+                {/* {error && (
                   <p className="text-sm text-red-400">
                     Please check Email or Password.
                   </p>
-                )}
-                <Button type="submit" className="w-full cursor-pointer">
+                )} */}
+                <Button
+                  formAction={login}
+                  type="submit"
+                  className="w-full cursor-pointer"
+                >
                   Login
                 </Button>
                 {/* <Button variant="outline" className="w-full">

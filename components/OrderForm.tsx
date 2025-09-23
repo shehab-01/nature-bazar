@@ -28,7 +28,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 
-import { supabase } from "@/lib/supabaseClient";
+import { createClient } from "@/lib/supabaseClient";
 import { useState } from "react";
 
 const formSchema = z.object({
@@ -67,6 +67,7 @@ const OrderForm = () => {
   // }
   const [open, setOpen] = useState(false);
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const supabase = createClient();
     console.log(values);
     const { error } = await supabase.from("tb_order").insert(values).single();
 
