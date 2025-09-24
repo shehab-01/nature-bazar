@@ -4,9 +4,10 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/lib/supabaseServer";
+import { createSession, deleteSession } from "@/lib/sessions";
 
 export async function login(formData: FormData) {
-  console.log("From login", formData);
+  // console.log("From login", formData);
   const supabase = await createClient();
 
   // type-casting here for convenience
@@ -18,11 +19,12 @@ export async function login(formData: FormData) {
 
   const { error, data } = await supabase.auth.signInWithPassword(data_);
 
-  console.log(data.user?.id);
+  console.log(data.user);
   const userId = data.user?.id;
 
   if (!userId) {
-    return { error: "No user found" };
+    // return { error: "No user found" };
+    console.log("User not found");
   }
 
   // fetch profile
@@ -34,9 +36,16 @@ export async function login(formData: FormData) {
 
   if (profileError) {
     console.error("Profile fetch error:", profileError.message);
-    return { error: profileError.message };
+    // return { error: profileError.message };
   }
+
+  // creating cookie
   console.log("User Profile:", profile);
+  const id = data.user?.id;
+  const userRole = profile?.role;
+  const approve_yn = profile?.approve_yn;
+  // create session and cookie
+  await createSession(id, userRole, approve_yn);
 
   if (error) {
     redirect("/error");
@@ -64,4 +73,9 @@ export async function signup(formData: FormData) {
 
   revalidatePath("/", "layout");
   redirect("/");
+}
+
+export async function logout() {
+  await deleteSession();
+  redirect("/admin/login");
 }

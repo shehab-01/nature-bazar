@@ -1,7 +1,9 @@
-import React from "react";
+import MyAgGrid from "@/components/MyGrid";
 
-const Users = () => {
-  return <div>Users</div>;
-};
-
-export default Users;
+export default function Home() {
+  return (
+    <div className="w-full">
+      <MyAgGrid />
+    </div>
+  );
+}
