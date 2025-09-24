@@ -60,15 +60,17 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarContent>
+      <SidebarContent className="bg-[#002664]">
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
+          <SidebarGroupLabel className="text-white text-xl ">
+            Nature Admin
+          </SidebarGroupLabel>
+          <SidebarGroupContent className="py-4">
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <a href={item.url} className="text-white">
                       <item.icon />
                       <span>{item.title}</span>
                     </a>
@@ -79,7 +81,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="bg-[#002664]">
         <SidebarMenu>
           <SidebarMenuItem>
             <Button
@@ -88,7 +90,7 @@ export function AppSidebar() {
                 handleLogout();
               }}
             >
-              Login Out
+              Logout
             </Button>
           </SidebarMenuItem>
         </SidebarMenu>
