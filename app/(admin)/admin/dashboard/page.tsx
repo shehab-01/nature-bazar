@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 // import {createClient } from "@/lib/supabaseClient";
 
 const dashboard = () => {
-  const router = useRouter();
+  // const router = useRouter();
 
   return <div>Dashboard</div>;
 };

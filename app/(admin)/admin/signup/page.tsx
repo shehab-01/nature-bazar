@@ -17,15 +17,13 @@ import {
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { supabase } from "@/lib/supabaseClient";
+import { createClient } from "@/lib/supabaseClient";
 // import { PasswordInput } from '@/components/ui/password-input'
 // import { PhoneInput } from '@/components/ui/phone-input'
 
@@ -62,6 +60,7 @@ export default function RegisterPreview() {
       console.log(values);
       // const payload = { ...values, role: "user" };
       // console.log(payload);
+      const supabase = createClient();
 
       const email = values.email;
       const password = values.password;

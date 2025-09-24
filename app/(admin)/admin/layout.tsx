@@ -11,7 +11,7 @@ export default function DashboardLayout({
     <html lang="en">
       <body>
         <div className="flex min-h-screen">
-          <main className="flex-1 p-6">{children}</main>
+          <main className="flex-1 ">{children}</main>
         </div>
       </body>
     </html>
