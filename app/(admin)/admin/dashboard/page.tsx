@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 // import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabaseClient";
+// import {createClient } from "@/lib/supabaseClient";
 
 const dashboard = () => {
   const router = useRouter();

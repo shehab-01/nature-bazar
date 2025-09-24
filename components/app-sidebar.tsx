@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
+import { logout } from "@/app/(admin)/admin/login/actions";
 
 // Menu items.
 const items = [
@@ -25,7 +26,7 @@ const items = [
   },
   {
     title: "Products",
-    url: "/admin/test",
+    url: "/admin/dashboard/products",
     icon: ShoppingBasket,
   },
   {
@@ -52,6 +53,8 @@ export function AppSidebar() {
     const supabase = createClient();
     console.log("Sign out");
     await supabase.auth.signOut();
+    await logout();
+
     router.push("/admin/login");
   };
 
