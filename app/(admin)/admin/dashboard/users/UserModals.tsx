@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -77,10 +78,10 @@ const UserModals = (params: ICellRendererParams & { isAdmin: boolean }) => {
       </Dialog>
 
       <Dialog open={adminOpen} onOpenChange={setAdminOpen}>
-        <DialogContent className="min-w-3xl">
+        <DialogContent className="min-w-3xl space-y-5">
           <DialogHeader>
-            <DialogTitle>Modify User </DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-center">Modify User </DialogTitle>
+            <DialogDescription className="text-center">
               Change user role, Approve or Reject user new user.
             </DialogDescription>
           </DialogHeader>
@@ -95,6 +96,7 @@ const UserModals = (params: ICellRendererParams & { isAdmin: boolean }) => {
                 name="name"
                 defaultValue={userData?.name ?? ""}
                 className="flex-1"
+                disabled
               />
             </div>
 
@@ -108,6 +110,7 @@ const UserModals = (params: ICellRendererParams & { isAdmin: boolean }) => {
                 name="phone"
                 defaultValue={userData?.phone ?? ""}
                 className="flex-1"
+                disabled
               />
               {/* or use a <Select> if roles are predefined */}
             </div>
@@ -132,7 +135,7 @@ const UserModals = (params: ICellRendererParams & { isAdmin: boolean }) => {
             {/* Row 4: Approve */}
             <div className="flex items-center gap-4">
               <Label htmlFor="role-1" className="w-24 text-right">
-                Approve
+                ApproveYN
               </Label>
               <Select defaultValue={userData?.approve_yn ? "true" : "false"}>
                 <SelectTrigger className="w-[180px]">
@@ -148,11 +151,22 @@ const UserModals = (params: ICellRendererParams & { isAdmin: boolean }) => {
             </div>
           </div>
 
-          <DialogFooter>
-            <Button variant="destructive">Delete User</Button>
-            <Button onClick={() => setAdminOpen(false)} className="bg-blue-500">
-              Update User
+          <DialogFooter className="sm:justify-between pt-5">
+            <Button size="sm" variant="destructive">
+              Delete User
             </Button>
+            <div className="space-x-2">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setAdminOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button size="sm" className="bg-blue-500">
+                Update User
+              </Button>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>
