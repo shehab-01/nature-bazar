@@ -12,6 +12,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface userData {
   name: string;
@@ -33,6 +42,11 @@ const UserModals = (params: ICellRendererParams & { isAdmin: boolean }) => {
   const handleClick = () => {
     console.log("Full row data:", params.data);
     console.log("isAdmin:", params.isAdmin);
+
+    // setUserData(()=> {...params.data})
+    setUserData({
+      ...params.data,
+    });
 
     const isAdmin = params.isAdmin;
     if (isAdmin) {
@@ -63,24 +77,82 @@ const UserModals = (params: ICellRendererParams & { isAdmin: boolean }) => {
       </Dialog>
 
       <Dialog open={adminOpen} onOpenChange={setAdminOpen}>
-        <DialogContent>
+        <DialogContent className="min-w-3xl">
           <DialogHeader>
             <DialogTitle>Modify User </DialogTitle>
-            <DialogDescription>Users</DialogDescription>
+            <DialogDescription>
+              Change user role, Approve or Reject user new user.
+            </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4">
-            <div className="grid gap-3">
-              <Label htmlFor="name-1">Name</Label>
-              <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
+            {/* Row 1: Name */}
+            <div className="flex items-center gap-4">
+              <Label htmlFor="name-1" className="w-24 text-right">
+                Name
+              </Label>
+              <Input
+                id="name-1"
+                name="name"
+                defaultValue={userData?.name ?? ""}
+                className="flex-1"
+              />
             </div>
-            <div className="grid gap-3">
-              <Label htmlFor="username-1">Username</Label>
-              <Input id="username-1" name="username" defaultValue="@peduarte" />
+
+            {/* Row 2: phonr */}
+            <div className="flex items-center gap-4">
+              <Label htmlFor="role-1" className="w-24 text-right">
+                Phone
+              </Label>
+              <Input
+                id="phone-1"
+                name="phone"
+                defaultValue={userData?.phone ?? ""}
+                className="flex-1"
+              />
+              {/* or use a <Select> if roles are predefined */}
+            </div>
+            {/* Row 3: Role */}
+            <div className="flex items-center gap-4">
+              <Label htmlFor="role-1" className="w-24 text-right">
+                Role
+              </Label>
+              <Select defaultValue={userData?.role ?? ""}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Assign role " />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="admin">Admin</SelectItem>
+                    <SelectItem value="user">User</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Row 4: Approve */}
+            <div className="flex items-center gap-4">
+              <Label htmlFor="role-1" className="w-24 text-right">
+                Approve
+              </Label>
+              <Select defaultValue={userData?.approve_yn ? "true" : "false"}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="true">Approved</SelectItem>
+                    <SelectItem value="false">Rejected</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
           <DialogFooter>
-            <Button onClick={() => setAdminOpen(false)}>Ok</Button>
+            <Button variant="destructive">Delete User</Button>
+            <Button onClick={() => setAdminOpen(false)} className="bg-blue-500">
+              Update User
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
