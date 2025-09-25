@@ -7,9 +7,11 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 import { AgGridReact } from "ag-grid-react";
 import { ICellRendererParams } from "ag-grid-community";
 import UserModals from "./UserModals";
+import { Badge } from "@/components/ui/badge";
 
 // supabase
 import { createClient } from "@/lib/supabaseClient";
+import { BadgeCheckIcon, BadgeQuestionMark } from "lucide-react";
 
 const UserGrid = ({ isAdmin }: { isAdmin: boolean }) => {
   const [rowData, setRowData] = useState<unknown[]>([]);
@@ -26,13 +28,18 @@ const UserGrid = ({ isAdmin }: { isAdmin: boolean }) => {
       flex: 1,
       cellRenderer: (params: ICellRendererParams) => {
         return params.value === true ? (
-          <p className="bg-green-300 p-auto text-center m-auto rounded-sm">
-            Approve
-          </p>
+          // <p className="bg-green-300 p-auto text-center m-auto rounded-sm">
+          //   Approve
+          // </p>
+          <Badge variant="destructive" className="bg-blue-500 text-white">
+            <BadgeCheckIcon />
+            Approved
+          </Badge>
         ) : (
-          <p className="bg-red-300 p-auto text-center m-auto rounded-sm">
+          <Badge variant="destructive">
+            <BadgeQuestionMark />
             Pending
-          </p>
+          </Badge>
         );
       },
     },
