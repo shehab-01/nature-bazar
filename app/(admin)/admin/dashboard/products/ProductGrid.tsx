@@ -8,6 +8,7 @@ import { AgGridReact } from "ag-grid-react";
 import { ICellRendererParams } from "ag-grid-community";
 // import UserModals from "./UserModals";
 import { Badge } from "@/components/ui/badge";
+import ProductModal from "./ProductModal";
 
 // supabase
 import { createClient } from "@/lib/supabaseClient";
@@ -18,7 +19,11 @@ const ProductGrid = ({ isAdmin }: { isAdmin: boolean }) => {
   const [columnDefs, setColumnDefs] = useState<ColDef[]>([
     {
       field: "product_name",
-      flex: 3,
+      flex: 2,
+    },
+    {
+      field: "product_name_bn",
+      flex: 2,
     },
     {
       field: "price",
@@ -58,7 +63,7 @@ const ProductGrid = ({ isAdmin }: { isAdmin: boolean }) => {
         );
       },
     },
-    { field: "catagory", flex: 3 },
+    { field: "catagory", flex: 1 },
     {
       field: "created_at",
       flex: 2,
@@ -79,9 +84,7 @@ const ProductGrid = ({ isAdmin }: { isAdmin: boolean }) => {
     },
     { field: "created_by_nm", flex: 2 },
     // TODO
-    // { field: "Action", flex: 2,
-    //     cellRenderer:
-    //  },
+    { field: "Action", flex: 1, cellRenderer: ProductModal },
     // { field: "created_at", flex: 2 },
 
     // {
@@ -97,7 +100,7 @@ const ProductGrid = ({ isAdmin }: { isAdmin: boolean }) => {
 
     const getUser = async () => {
       const { data } = await supabase.from("tb_products").select();
-      // console.log(data);
+      console.log(data);
       if (data) {
         setRowData(data);
       }
