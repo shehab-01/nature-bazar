@@ -71,7 +71,7 @@ const ProductModal = (params: ICellRendererParams) => {
       <Dialog open={openModal} onOpenChange={setOpenModal}>
         <DialogContent className="min-w-3xl">
           <DialogHeader>
-            <DialogTitle>Modify User </DialogTitle>
+            <DialogTitle>Modify Product </DialogTitle>
             <DialogDescription>
               Change user role, Approve or Reject user new user.
             </DialogDescription>

@@ -1,5 +1,4 @@
 "use client";
-
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 
@@ -10,11 +9,11 @@ export default function DashboardLayout({
 }) {
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen min-w-screen">
+      <div className="flex w-full min-h-screen">
         <AppSidebar />
-        <main>
+        <main className="flex-1 w-full overflow-hidden">
           <SidebarTrigger />
-          {children}
+          <div className="w-full">{children}</div>
         </main>
       </div>
     </SidebarProvider>

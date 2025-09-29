@@ -85,14 +85,6 @@ const ProductGrid = ({ isAdmin }: { isAdmin: boolean }) => {
     { field: "created_by_nm", flex: 2 },
     // TODO
     { field: "Action", flex: 1, cellRenderer: ProductModal },
-    // { field: "created_at", flex: 2 },
-
-    // {
-    //   field: "Action",
-    //   flex: 1,
-    //   cellRenderer: UserModals,
-    //   cellRendererParams: { isAdmin: isAdmin },
-    // },
   ]);
 
   useEffect(() => {
@@ -109,7 +101,7 @@ const ProductGrid = ({ isAdmin }: { isAdmin: boolean }) => {
   }, []);
 
   return (
-    <div style={{ height: 500, width: "85%" }}>
+    <div style={{ height: 500 }}>
       <AgGridReact rowData={rowData} columnDefs={columnDefs} />
     </div>
   );
